@@ -1,32 +1,28 @@
-یک پایگاه داده در حافظه به زبان C++ که امکان مدیریت جداول، رکوردها و عملیات CRUD را فراهم می‌کند.
 
-ویژگی‌های اصلی
+An in-memory database in C++ that enables management of tables, records, and CRUD operations.
 
-·  ایجاد و مدیریت جداول با اسکیمای قابل تعریف
-·  افزودن رکوردهای جدید با انواع داده مختلف
-·  جستجوی رکوردها بر اساس مقادیر مختلف
-·  به‌روزرسانی رکوردهای موجود
-·  حذف منطقی رکوردها (Soft Delete)
-·  مدیریت متادیتای جداول و رکوردها
+Key Features
 
-ساختار کلاس‌ها
+· Create and manage tables with customizable schemas
+· Add new records with different data types
+· Search records based on various values
+· Update existing records
+· Soft delete records
+· Manage metadata of tables and records
 
-کلاس Column
+Class Structure
 
-مدیریت ستون‌های جدول با نام و نوع داده
+Column Class
+Manages table columns with name and data type
 
-کلاس Record
+Record Class
+Stores record data along with metadata
 
-ذخیره‌سازی داده‌های هر رکورد به همراه متادیتا
+Schema Class
+Defines table structure including name and column list
 
-کلاس Schema
+DbInfo Class
+Manages database information and tables
 
-تعریف ساختار جدول شامل نام و لیست ستون‌ها
-
-کلاس DbInfo
-
-مدیریت اطلاعات پایگاه داده و جداول
-
-کلاس DataBase
-
-هسته اصلی سیستم پایگاه داده با عملیات CRUD
+DataBase Class
+Core database system with CRUD operations
