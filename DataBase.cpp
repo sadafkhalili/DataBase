@@ -19,13 +19,13 @@ public:
     string name;
     string Type;
 
-    Column(string colName, string colType) : name(colName), Type(colType) {}
+    Column(string colName, string colType) : name(colName), Type(colType) {}  
 };
 
 class Record {
 public:
     MetaData metaData;
-    vector<string> data;
+    vector<string> data;    
 };
 
 
@@ -45,36 +45,36 @@ public:
 
     void showColumns() {
         cout << tableName << ":\n";
-        for (const auto &col : columns) {
+        for (const auto &col : columns) { 
             cout << " -------> " << col.name << endl << col.Type << endl;
         }
     }
-    bool checkColumn(string columnName) {
-       for (const auto &col : columns) {   // کانست برای امنیت کد هست ( متغیر تغییر نمیکنه)
-        if (col.name == columnName) {
+    bool checkColumn(string columnName) { 
+       for (const auto &col : columns) {   // کانست برای امنیت کد هست ( متغیر تغییر نمیکنه) 
+        if (col.name == columnName) { 
             cout << "exists" ;
-                 return true;
-              }
- }
-    cout << "does not exist";
-       return false;
+                 return true; 
+              } 
+ } 
+    cout << "does not exist"; 
+       return false; 
   }
 };
 
 
-// اینم مثل شماست ولی برای تیبل ها
+// اینم مثل شماست ولی برای تیبل ها 
 class DbInfo {
 
-
+    
 
 public:
     vector<Schema> tables;
     void addTable(Schema table) {
         tables.push_back(table);
-
+        
     }
-
-
+    
+    
     void showTables() {
         cout << "Tables in database:\n";
         for (const auto& table : tables) {
@@ -83,32 +83,32 @@ public:
     }
 
     bool chekTable(string tableName) {
-        for (const auto &table :  tables) {
+        for (const auto &table :  tables) { 
             if (table.tableName == tableName) {
                 return true;
             }
         }
         return false;
     }
-   void removeTable(string tableName) {
-    for (auto it = tables.begin(); it != tables.end(); it++) {
-        if (it->tableName == tableName) {
-            tables.erase(it);
-            break;
-        }
-    }
+   void removeTable(string tableName) { 
+    for (auto it = tables.begin(); it != tables.end(); it++) { 
+        if (it->tableName == tableName) { 
+            tables.erase(it);  
+            break; 
+        } 
+    } 
 }
 };
 
 class DataBase {
 private:
-
+    
     template<typename ARG, typename... ARGS>
     void insertrecored(ARG data, ARGS... arr){
             records[records.size()-1].data.push_back(data);
 
             insertrecored(arr...);
-
+        
     }
     void insertrecored(){
         cout<<"Record added to ";
@@ -118,15 +118,15 @@ private:
 public:
     vector<Record> records;
     DbInfo dbInfo;
+  
 
 
 
 
-
-
+   
     template<typename ARG, typename... ARGS>
     void insertRecord(string tableName,ARG data,ARGS... arr ){
-
+        
         if(dbInfo.chekTable(tableName)){
             records.resize(records.size()+1);
             records[records.size()-1].metaData.tableName=tableName;
@@ -138,25 +138,25 @@ public:
         }
 
     }
-
-
+    
+    
 
     void findRecords(string table_name,string find) {
         int index=0;
         vector<int> str_fields;
         for (auto& table:dbInfo.tables ){
-            if(table.tableName==table_name){
+            if(table.tableName==table_name){                
                 for (auto& col: table.columns){
                     if( col.Type=="string"){
                         str_fields.push_back(index);
-
+                        
                     }
                 index++;
                 }
-            }
+            }    
         }
-
-        for (Record record : records) {
+        
+        for (Record record : records) {        
             if (record.metaData.tableName == table_name && !record.metaData.isDeleted) {
                 for(int i:str_fields){
                     if (record.data[i]==find){
@@ -179,7 +179,7 @@ public:
                     }
                 index++;
                 }
-            }
+            }    
         }
         for (const auto& record : records) {
             if (record.metaData.tableName == table_name && !record.metaData.isDeleted) {
@@ -204,7 +204,7 @@ public:
                     }
                 index++;
                 }
-            }
+            }    
         }
         for (const auto& record : records) {
             if (record.metaData.tableName == table_name && !record.metaData.isDeleted) {
@@ -218,8 +218,8 @@ public:
             }
         }
     }
-
-
+    
+    
 
     void updateRecord(string tableName, int recordIndex, vector<string> newData) {
         for (auto& record : records) {
@@ -250,7 +250,7 @@ int main() {
     DataBase myDatabase;
 
     Schema users("Users");
-
+    
     users.addColumn("ID", "int");
     users.addColumn("Name", "string");
     myDatabase.dbInfo.addTable(users);
